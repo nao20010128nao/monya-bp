@@ -10,6 +10,7 @@ const coinUtil = require("./coinUtil")
 const storage = require("./storage")
 const zecLib = require("@missmonacoin/bitcoinjs-lib-zcash")
 const bchLib = require("@missmonacoin/bitcoincashjs-lib")
+const blkLib = require("@missmonacoin/blackcoinjs-lib")
 module.exports=class{
   
   constructor(opt){
@@ -18,9 +19,10 @@ module.exports=class{
     this.unit = opt.unit;
     this.unitEasy = opt.unitEasy;
     this.bip44 = opt.bip44;
-    this.bip49 = opt.bip49;
+    this.bip49 = opt.bip49
     this.apiEndpoints=opt.apiEndpoints||[opt.defaultAPIEndpoint]
     this.apiEndpoint = opt.defaultAPIEndpoint||this.apiEndpoints[0];
+    this.explorer = opt.explorer
     this.network = opt.network;
     this.price = opt.price;
     this.dummy=!!opt.dummy
@@ -45,6 +47,9 @@ module.exports=class{
         break
       case "btg":
         this.lib=bchLib
+        break
+      case "blk":
+        this.lib=blkLib
         break
       default:
         this.lib=bcLib
@@ -604,5 +609,16 @@ module.exports=class{
       return true
     }
     return false
+  }
+  openExplorer(opt){
+    if(opt.txId){
+      coinUtil.openUrl(this.explorer+"/tx/"+opt.txId)
+    }
+    if(opt.address){
+      coinUtil.openUrl(this.explorer+"/address/"+opt.txId)
+    }
+    if(opt.blockHash){
+      coinUtil.openUrl(this.explorer+"/block/"+opt.blockHash)
+    }
   }
 }
