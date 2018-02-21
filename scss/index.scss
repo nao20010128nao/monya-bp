@@ -61,7 +61,8 @@ ons-dialog .dialog{
     background-color: $baseColor;
     padding: 2% 0%;
     color:$baseTextColor;
-    background-image:url(../res/monacoin.png);
+    background-image:url(../res/realmona.png);
+    background-size:contain;
     background-repeat:no-repeat;
     background-position:bottom right;
     text-align: center;

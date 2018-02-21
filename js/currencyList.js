@@ -43,10 +43,10 @@ const defaultCoins=[
     confirmations:6,
     counterpartyEndpoint:"https://wallet.monaparty.me/_api"
   },{
-    coinScreenName:j?"王道を征く仮想通貨":"King of Cryptocurrency",
+    coinScreenName:j?"ﾋﾞｯﾄ":"Bit!Bit!",
     coinId:"btc",
-    unit:"KING",
-    unitEasy:j?"王道を征く":"King",
+    unit:"BTC",
+    unitEasy:j?"ﾋﾞｯﾄ":"BTC",
     bip44:{
       coinType:0,
       account:0

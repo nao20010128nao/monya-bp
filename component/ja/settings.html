@@ -23,7 +23,7 @@
         <div class="right">
           <v-ons-select v-model="d.fiat" @change="save">
             <option value="jpy">日本円</option>
-            <option value="mona">モナコイン</option>
+            
             <option value="usd">米ドル</option>
           </v-ons-select>
         </div>
@@ -74,34 +74,15 @@
         </div>
       </v-ons-list-item>
       </div>
-      <v-ons-list-header>Monappy</v-ons-list-header>
+      <v-ons-list-header>MonaHappy</v-ons-list-header>
       <v-ons-list-item>
-        <div class="center">Monappyメニュー</div>
+        <div class="center">MonaHappyメニュー</div>
         <div class="right"><v-ons-switch v-model="d.monappy.enabled" @change="save"></v-ons-switch></div>
       </v-ons-list-item>
       <div v-show="d.monappy.enabled">
         <v-ons-list-item>
-          <div class="center">あなたのMonappy ID</div>
-          <div class="right"><span class="atmark">@</span><v-ons-input v-model="d.monappy.myUserId" placeholder="Monappy Id" @change="changeMonappy" @input="monappyNotExist=false" :class="{monappyNotExist:monappyNotExist}"></v-ons-input></div>
-        </v-ons-list-item>
-        
-      </div>
-      <v-ons-list-header>カードであそぶ</v-ons-list-header>
-      <v-ons-list-item>
-        <div class="center">カードであそぶメニュー</div>
-        <div class="right"><v-ons-switch v-model="d.monaparty.enabled" @change="save"></v-ons-switch></div>
-      </v-ons-list-item>
-      <div v-show="d.monaparty.enabled">
-        <v-ons-list-item>
-          <div class="center">背景</div>
-          <div class="right">
-            <v-ons-select v-model="d.monaparty.bgClass" @change="save">
-              <option value="sand">砂</option>
-              <option value="realmona">リアルモナコインちゃん</option>
-              <option value="white">単色:白</option>
-              <option value="blue">単色:青</option>
-          </v-ons-select>
-          </div>
+          <div class="center">あなたのMonaHappy ID</div>
+          <div class="right"><span class="atmark">@</span><v-ons-input v-model="d.monappy.myUserId" placeholder="MonaHappy Id" @change="changeMonappy" @input="monappyNotExist=false" :class="{monappyNotExist:monappyNotExist}"></v-ons-input></div>
         </v-ons-list-item>
       </div>
     </v-ons-list>
