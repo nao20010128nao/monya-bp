@@ -1,19 +1,22 @@
 const Currency = require("./currency")
 const axios = require('axios');
-const coinUtil=require("../js/coinUtil")
+const coinUtil=require("./coinUtil")
+const j = require("./lang").getLang()==="ja"
+
+// Coin id should be lowercase ticker symbol. Add prefix if this coin is different coin like testnet. Add suffix if this coin is compatible with the original coin but different mode like SegWit, Monacoin-3-Prefix
 
 const defaultCoins=[
-  {//key = coinId that is lowercase ticker symbol
-    coinScreenName:"モナコイン",
+  {
+    coinScreenName:j?"Litecoin(Child)":"Litecoin(Child)",
     coinId:"mona",
-    unit:"MONA",
-    unitEasy:"モナ",
+    unit:"LTCC",
+    unitEasy:j?"ライトコインの子供":"A child of Litecoin",
     bip44:{
-      coinType:22,//from slip44
+      coinType:22,
       account:0
     },
     bip21:"monacoin",
-    defaultFeeSatPerByte:200,//will implement dynamic fee
+    defaultFeeSatPerByte:200,
     icon:require("../res/coins/mona.png"),
     defaultAPIEndpoint:"https://mona.insight.monaco-ex.org/insight-api-monacoin",
     explorer:"https://mona.insight.monaco-ex.org/insight",
@@ -24,9 +27,9 @@ const defaultCoins=[
         
         private: 0x0488ade4
       },
-      pubKeyHash: 50,// M
-      scriptHash: 55,// P new scripthash
-      wif: 178,//new wif
+      pubKeyHash: 50,
+      scriptHash: 55,
+      wif: 178,
       bech32:"mona"
     },
     sound:require("../res/coins/paySound/mona.m4a"),
@@ -40,44 +43,10 @@ const defaultCoins=[
     confirmations:6,
     counterpartyEndpoint:"https://wallet.monaparty.me/_api"
   },{
-    coinScreenName:"ビットゼニー",
-    coinId:"zny",
-    unit:"ZNY",
-    unitEasy:"ゼニー",
-    bip44:{
-      coinType:123,
-      account:0
-    },
-    bip21:"bitzeny",
-    defaultFeeSatPerByte:200,
-    icon:require("../res/coins/zny.png"),
-    defaultAPIEndpoint:"https://zeny.insight.monaco-ex.org/api",
-    apiEndpoints:["https://zeny.insight.monaco-ex.org/api","https://zenyinsight.tomotomo9696.xyz/api"],
-    explorer:"https://zeny.insight.monaco-ex.org/api",
-    network:{
-      messagePrefix: '\x18BitZeny Signed Message:\n',
-      bip32: {
-        public: 0x0488b21e,
-        
-        private: 0x0488ade4
-      },
-      pubKeyHash: 81,// Z
-      scriptHash: 5,// 3
-      wif: 128
-    },
-    enableSegwit:false,
-    price:{
-      url:coinUtil.proxyUrl("https://www.coingecko.com/price_charts/bitzeny/jpy/24_hours.json"),
-      json:true,
-      jsonPath:["stats",-1,1],
-      fiat:"jpy"
-    },
-    sound:require("../res/coins/paySound/zny.m4a")
-  },{
-    coinScreenName:"ビットコイン",
+    coinScreenName:j?"王道を征く仮想通貨":"King of Cryptocurrency",
     coinId:"btc",
-    unit:"BTC",
-    unitEasy:"ビットコイン",
+    unit:"KING",
+    unitEasy:j?"王道を征く":"King",
     bip44:{
       coinType:0,
       account:0
@@ -95,8 +64,8 @@ const defaultCoins=[
         
         private: 0x0488ade4
       },
-      pubKeyHash: 0,// 1
-      scriptHash: 5,// 3
+      pubKeyHash: 0,
+      scriptHash: 5,
       wif: 128
     },
     enableSegwit:false,
@@ -109,16 +78,16 @@ const defaultCoins=[
     confirmations:6,
     counterpartyEndpoint:"https://wallet.counterwallet.io/_api"
   },{
-    coinScreenName:"ライトコイン",
+    coinScreenName:j?"ライトコイン":"Litecoin",
     coinId:"ltc",
     unit:"LTC",
-    unitEasy:"ライトコイン",
+    unitEasy:j?"ライトコイン":"Litecoin",
     bip44:{
-      coinType:2,//from slip44
+      coinType:2,
       account:0
     },
     bip21:"litecoin",
-    defaultFeeSatPerByte:500,//will implement dynamic fee
+    defaultFeeSatPerByte:500,
     icon:require("../res/coins/ltc.png"),
     defaultAPIEndpoint:"https://insight.litecore.io/api",
     explorer:"https://insight.litecore.io",
@@ -129,8 +98,8 @@ const defaultCoins=[
         
         private: 0x0488ade4
       },
-      pubKeyHash: 48,// L
-      scriptHash: 5,// 3
+      pubKeyHash: 48,
+      scriptHash: 5,
       wif: 176,
       bech32:"lc"
     },
@@ -143,10 +112,10 @@ const defaultCoins=[
     },
     confirmations:6
   },{
-    coinScreenName:"ビットコイン(Segwit)",
+    coinScreenName:j?"SegWitモード":"SegWit mode",
     coinId:"btcsw",
-    unit:"BTC(SW)",
-    unitEasy:"ビットコイン(SW)",
+    unit:"SegWit",
+    unitEasy:j?"SegWit":"SegWit",
     bip49:{
       coinType:0,
       account:0
@@ -178,10 +147,10 @@ const defaultCoins=[
     confirmations:6,
     counterpartyEndpoint:"https://wallet.counterwallet.io/_api"
   },{
-    coinScreenName:"ビットコインキャッシュ",
+    coinScreenName:j?"ビットコインキャッシュ":"Bitcoin Cash",
     coinId:"bch",
     unit:"BCH",
-    unitEasy:"ビッチ",
+    unitEasy:j?"ビッチ":"BitCh",
     bip44:{
       coinType:145,
       account:0
@@ -236,7 +205,7 @@ exports.each=(fn)=>{
  * @param {function} fn(Currency).
  */
 exports.eachWithDummy=(fn)=>{
-    
+  
   for(let curName in coins){
     if((coins[curName] instanceof Currency)){
       fn(coins[curName])
@@ -260,21 +229,21 @@ exports.eachWithPub=(fn)=>{
  * @param {String} coinId.
  */
 exports.get=coinId=>{
-    
+  
   if((coins[coinId] instanceof Currency)){
     return coins[coinId]
   }
 }
-exports.init =customCoins=>{
+exports.init =cCoins=>{
   for(let i = 0;i<defaultCoins.length;i++){
     const defCoin = defaultCoins[i]
     coins[defCoin.coinId]=new Currency(defCoin)
   }
-  for(let i = 0;i<customCoins.length;i++){
-    const defCoin = customCoins[i]
+  for(let i = 0;i<cCoins.length;i++){
+    const defCoin = cCoins[i]
     coins[defCoin.coinId]=new Currency(defCoin)
   }
 }
-exports.addCurrency=customCoin=>{
-  coins[customCoin.coinId]=customCoin
+exports.addCurrency=coin=>{
+  coins[coin.coinId]=coin
 }

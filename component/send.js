@@ -1,6 +1,6 @@
 const coinUtil=require("../js/coinUtil")
 const currencyList=require("../js/currencyList")
-module.exports=require("./send.html")({
+module.exports=require("../js/lang.js")({ja:require("./ja/send.html"),en:require("./en/send.html")})({
   data(){
     return {
       address:"",
@@ -62,7 +62,7 @@ module.exports=require("./send.html")({
       this.$set(this,"possibility",[])
       if(this.address){
         coinUtil.parseUrl(this.address).then(u=>{
-          if(u.isCoinAddress&&u.isPrefixOk&&u.isValidAddress){
+          if(u.isCoinAddress&&u.isValidAddress){
             const cur=currencyList.get(u.coinId)
             this.coinType=u.coinId
             this.possibility.push({

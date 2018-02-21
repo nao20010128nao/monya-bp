@@ -4,7 +4,7 @@ const storage = require("../js/storage")
 const coinUtil = require("../js/coinUtil")
 const monappyApi=require("../js/monappyApi")
 
-module.exports=require("./invoice.html")({
+module.exports=require("../js/lang.js")({ja:require("./ja/invoice.html"),en:require("./en/invoice.html")})({
   data(){
     return {
       address:"",
@@ -27,7 +27,8 @@ module.exports=require("./invoice.html")({
       orderDlg:false,
       orders:[],
       onOrder:[],
-      monappyNotExist:false
+      monappyNotExist:false,
+      isAddrUrl:false
     }
   },
   store:require("../js/store.js"),
@@ -113,7 +114,7 @@ module.exports=require("./invoice.html")({
         label:this.labels[this.addressIndex],
         message:this.message,
         "req-opreturn":this.messageOpRet
-      })
+      },this.isAddrUrl)
       this.generateQR(url)
       return url
     },

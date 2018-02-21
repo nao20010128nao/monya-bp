@@ -1,8 +1,11 @@
 require("../scss/index.scss")
-require('../dist/onsenui/css/onsenui.min.css')
-require('../dist/onsenui/css/onsen-css-components.min.css')
+require('../res/onsenui/css/onsenui.min.css')
+require('../res/onsenui/css/onsen-css-components.min.css')
+if(!window.cordova){
+  require('../res/cordova-plugin-qrscanner-lib.min.js')
+}
 const Vue = require("vue/dist/vue.runtime.min")
-//const VueOnsen = require("vue-onsenui")
+const VueOnsen = require('vue-onsenui')
 const Vuex = require("vuex")
 
 
