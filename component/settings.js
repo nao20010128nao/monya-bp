@@ -27,7 +27,8 @@ module.exports=require("../js/lang.js")({ja:require("./ja/settings.html"),en:req
         }
       },
       monapartyTitleList:currencyList.monapartyTitle,
-      lang:"ja"
+      lang:"ja",
+      inex:window.cordova&&window.cordova.platformId!=="ios"
     }
   },
   methods:{

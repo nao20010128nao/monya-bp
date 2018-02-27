@@ -8,7 +8,7 @@
       <v-ons-list-item modifier="tappable chevron" @click="goToSetPassword"><div class="center">パスワードを変更</div></v-ons-list-item>
       <v-ons-list-item modifier="tappable chevron" @click="goToEditOrder"><div class="center">請求一覧の編集</div></v-ons-list-item>
       <v-ons-list-item modifier="tappable chevron" @click="goToSweep"><div class="center">既存ウォレットからの吸出し</div></v-ons-list-item>
-      <v-ons-list-item modifier="tappable chevron" @click="goToImportExport"><div class="center">インポート/エクスポート</div></v-ons-list-item>
+      <v-ons-list-item modifier="tappable chevron" @click="goToImportExport" v-if="inex"><div class="center">インポート/エクスポート</div></v-ons-list-item>
       
 
       <v-ons-list-header>お金</v-ons-list-header>
