@@ -47,16 +47,16 @@
         
         <v-ons-list-item v-for="c in curs">
           <div class="left">
-            <img :src="c.icon"/>
+            <img class="list-item__thumbnail" :src="c.icon"/>
           </div>
           <div >
-            <div class="screenName">{{c.screenName||"取得失敗"}}</div>
-            <div class="price">
-              <currency-set :amount="c.price" :ticker="c.coinId" :fiatTicker="fiat"></currency-set>
-            </div>
+            <span class="screenName list-item__title">{{c.screenName}}</span>
+            <span class="list-item__subtitle">
+              {{c.unit||"取得失敗"}}
+            </span>
           </div>
           <div class="w_right">
-            <div class="amount" :class='{unconfirmed:c.unconfirmed}'><currency-set :amount="c.balance" :ticker="c.coinId"></currency-set><span v-show="c.unconfirmed">+{{c.unconfirmed}}待機中</span></div>
+            <div class="amount" :class='{unconfirmed:c.unconfirmed}'><currency-set :amount="c.balance" :ticker="c.coinId"></currency-set><span v-show="c.unconfirmed">{{c.unconfirmed}}待機中</span></div>
             <div class="fiatConv"><currency-set :amount="c.balance*c.price" :ticker="fiat" :easy="isEasy"></currency-set></div>
           </div>
         </v-ons-list-item>

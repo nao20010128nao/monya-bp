@@ -31,7 +31,8 @@ module.exports=require("../js/lang.js")({ja:require("./ja/home.html"),en:require
           unconfirmed:0,
           screenName:cur.coinScreenName,
           price:0,
-          icon:cur.icon
+          icon:cur.icon,
+          unit:cur.unit
         }
         
         promises.push(cur.getWholeBalanceOfThisAccount()
